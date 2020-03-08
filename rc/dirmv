@@ -1,0 +1,23 @@
+#!/bin/rc
+# Perform mv(1)-like functionality with directories, dircp(1)-style
+# usage: dirmv from to
+
+switch($#*){
+case 2
+	if(! test -d $2)
+		mkdir -p $2
+	if not{
+		echo error: destination directory exists. >[1=2]
+		exit 'to directory exists'
+	}
+		
+	if(dircp $1 $2)
+		rm -r $1
+	if not{
+		echo error: copy failed. >[1=2]
+		exit 'copy failure'
+	}
+case *
+	echo usage: dirmv from to >[1=2]
+	exit usage
+}

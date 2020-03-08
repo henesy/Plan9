@@ -1,0 +1,14 @@
+#!/bin/rc
+
+fn list{
+	l = `{ls -F $*}
+	for(i in $l){
+		if(~ $i */)
+			list $i
+		if not
+			echo $i
+	}
+}
+
+list $*
+

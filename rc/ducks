@@ -1,0 +1,12 @@
+#!/bin/rc
+# usage: ducks /pathA /pathB …
+
+targs = $*
+
+switch($#*){
+case 0;
+	targs = .
+case *;
+}
+
+du -s -b 1024 $targs | sort -rn | sed '11q'

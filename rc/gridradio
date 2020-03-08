@@ -1,0 +1,3 @@
+#!/bin/rc
+rm /srv/radio
+srv tcp!plan-nue.youkai.pw!4458 radio

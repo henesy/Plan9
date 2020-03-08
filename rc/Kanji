@@ -1,0 +1,5 @@
+#!/bin/rc
+
+pipefile -r ktrans /dev/cons
+#rio -i lib/windows </dev/cons
+ario -s -i riostart </dev/cons

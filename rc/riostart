@@ -1,0 +1,5 @@
+#!/bin/rc
+window 0,0,161,117 stats -lmisce
+window 161,0,350,130 faces
+sleep 0.1
+window -miny 130

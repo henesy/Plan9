@@ -1,0 +1,63 @@
+#!/bin/rc
+# Sed in-place a list of files as arguments
+# usage: sedi [sed arguments] -- file …
+# TODO? ­ recursive on dirs
+
+rfork n;
+
+argv0 = $0
+fn usage {
+	echo >[1=2] 'usage:' $argv0 '[sed arguments] -- file …'
+	exit 'usage'
+}
+
+sargs = ()
+root = '/tmp/sedi.'^$pid^'/'
+
+while(! ~ $1 '--'){
+	# TODO? ­ quote non-flag (-?) arguments
+	sargs = ($sargs $1)
+	shift
+}
+
+# Out of --
+shift
+
+# Need at least 1 file
+if(~ $#* 0)
+	usage
+
+ramfs
+mkdir -p $root
+mstatus = $status
+if(! test -d $root){
+	echo >[1=2] 'err: could not mkdir root dir' $root - $mstatus
+	exit 'could not mkdir root'
+}
+
+files = $*
+
+for(f in $files){
+	@{
+		suffix = $f^'.'^$pid
+		tmpf = $root^$suffix
+		lockf = $tmpf^'.lock'
+
+		touch $lockf
+		
+		lock -w $lockf sed $sargs $f > $tmpf
+		lock -w $lockf mv $tmpf $f
+		
+		rm $lockf
+	}
+}
+
+# Wait for sub-shells to clean up then exit
+while(){
+	n = `{ls $root}
+	if(~ $#n 0){
+		rm $root
+		exit
+	}
+	sleep 0.010
+}

@@ -1,0 +1,15 @@
+#!/bin/rc
+# Prints the skeleton of a Plan 9 C program
+
+cat <<EOF
+#include <u.h>
+#include <libc.h>
+
+void
+main(int, char*[])
+{
+	
+
+	exits(nil);
+}
+EOF

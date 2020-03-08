@@ -1,0 +1,26 @@
+#!/bin/rc
+# mkinit - generate a mkfile
+
+rfork e
+
+argv0 = $0
+fn usage {
+	echo usage: mkinit
+	exit usage
+}
+
+cat <<EOF
+'</$objtype/mkfile'
+
+TARG = 
+
+OFILES = 
+
+HFILES = 
+
+BIN = '$home/bin/$objtype'
+
+MAN = 
+
+</sys/src/cmd/mkone
+EOF

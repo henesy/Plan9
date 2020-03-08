@@ -1,0 +1,18 @@
+#!/bin/rc
+# usage: yscp /path/local /path/remote
+
+argv0=$0
+fn usage {
+	echo 'usage:' $argv0 'yscp from to'
+	exit 'usage'
+}
+
+switch($#*){
+case 2;
+	;
+case *;
+	usage
+}
+
+postnixn
+cp $1 /n/postnix.pw/$2
