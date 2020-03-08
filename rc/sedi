@@ -38,8 +38,11 @@ if(! test -d $root){
 files = $*
 
 for(f in $files){
+	bakf = $f^'.'^$pid
+	cp $f $bakf
 	@{
-		suffix = $f^'.'^$pid
+		fname = `{basename $f}
+		suffix = $fname^'.'^$pid
 		tmpf = $root^$suffix
 		lockf = $tmpf^'.lock'
 
