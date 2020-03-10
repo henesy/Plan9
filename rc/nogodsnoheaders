@@ -17,6 +17,6 @@ if(~ $#* 0)
 
 files = $*
 
-incregex = '#include<*'
+incregex = '#include[ 	]<'
 
 sedi '/'^$incregex^'/d' -- $files

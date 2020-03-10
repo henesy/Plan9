@@ -1,6 +1,6 @@
 #!/bin/rc
-# Convert primitive types from posix to plan9 style
-# usage: convtypes file …
+# Convert prints from posix stdio to plan9 style
+# usage: convio file …
 
 rfork n
 
@@ -18,20 +18,18 @@ if(~ $#* 0)
 files = $*
 
 # I hate this ☺
-# Types which contain the names of other types must come first
+# Names which contain the names of other names must come first
+# NULL and exit are just here for the ride
 subs =	(\
-		uint8_t		u8int	\
-		uint16_t	u16int	\
-		uint32_t	u32int	\
-		uint64_t	u64int	\
-		int8_t		s8int	\
-		int16_t		s16int	\
-		int32_t		s32int	\
-		int64_t		s64int	\
-		size_t		usize	\
-		time_t		long	\
+		printf		print	\
+		fopen		open	\
+		fread		read	\
+		fwrite		write	\
+		NULL		nil		\
+		exit		exits	\
 		)
 
+# This should just be a rc library file function
 fn sub {
 	while(! ~ $#* 0){
 		# Posix type 
