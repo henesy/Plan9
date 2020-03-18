@@ -1,0 +1,18 @@
+#!/bin/rc
+# Enumerate where a binary originates from where $path == (/bin .)
+# usage: whereis program
+
+argv0 = $0
+if(! ~ $#* 1){
+	echo >[1=2] 'usage:' $argv0 'program'
+	exit usage
+}
+
+dirs = `{ns | grep '^bind' | grep '[ 	]/bin[ 	]$' | awk '{print $3}' | grep -v '^/bin$'}
+dirs = ($dirs /$objtype/bin .)
+
+for(d in $dirs){
+	if(test -x $d/$1){
+		echo $d/$1
+	}
+}
