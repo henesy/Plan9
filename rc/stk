@@ -1,0 +1,20 @@
+#!/bin/rc
+# Print the stack trace for a crashed program
+# Use `-t` for threaded programs
+# usage: stk [-t] pid
+# Originally by mischief
+
+flagfmt='t'
+args='pid'
+
+if(! ifs=() eval `{aux/getflags $*} || ~ $#* 0){
+	aux/usage
+	exit usage
+}
+
+if(! ~ $#flagt 1){
+	echo 'lstk()' | acid $1
+}
+if not{
+	echo 'stacks()' | acid -lthread $1
+}
