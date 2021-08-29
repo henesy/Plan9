@@ -1,0 +1,12 @@
+#!/bin/rc
+
+name = ''
+
+switch($#*){
+case 1
+	name = $1
+case *
+	name = `{read}
+}
+
+gr '^'^$name^'*\('

@@ -1,0 +1,22 @@
+#!/bin/rc
+# Strip all `#include <*.h>` lines
+# usage: nogodsnoheaders file …
+
+rfork n
+
+argv0 = $0
+files = ()
+
+fn usage {
+	echo >[1=2] 'usage:' $argv0 'file …'
+	exit 'usage'
+}
+
+if(~ $#* 0)
+	usage
+
+files = $*
+
+incregex = '#include[ 	]<'
+
+sedi '/'^$incregex^'/d' -- $files

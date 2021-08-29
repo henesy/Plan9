@@ -1,0 +1,2 @@
+#!/bin/rc
+sshfs -m /n/postnix.pw -r / -- -u seh tcp!postnix.pw!49

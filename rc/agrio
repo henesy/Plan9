@@ -1,0 +1,8 @@
+#!/bin/rc
+# Grio acme+abaco-like theme
+winbg = 0xFFFFEAFF
+scrollbar = 0x99994CFF
+select = 0x00994CFF
+unselect = 0x88CC88FF
+
+grio -s -u $winbg -l $scrollbar -y $select -z $unselect -i riostart

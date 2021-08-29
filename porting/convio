@@ -1,0 +1,52 @@
+#!/bin/rc
+# Convert prints from posix stdio to plan9 style
+# usage: convio file …
+
+rfork n
+
+argv0 = $0
+files = ()
+
+fn usage {
+	echo >[1=2] 'usage:' $argv0 'file …'
+	exit 'usage'
+}
+
+if(~ $#* 0)
+	usage
+
+files = $*
+
+# I hate this ☺
+# Names which contain the names of other names must come first
+# NULL and exit are just here for the ride
+subs =	(\
+		printf		print	\
+		fopen		open	\
+		fread		read	\
+		fwrite		write	\
+		NULL		nil		\
+		exit		exits	\
+		)
+
+# This should just be a rc library file function
+fn sub {
+	while(! ~ $#* 0){
+		# Posix type 
+		tp = $1
+
+		shift
+		
+		# 9 type
+		t9 = $1
+		
+		# Substitute
+		echo $tp → $t9
+		sedi 's/'^$tp^'/'^$t9^'/g' -- $files
+		
+		# Done
+		shift
+	}
+}
+
+sub $subs

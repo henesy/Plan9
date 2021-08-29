@@ -1,0 +1,3 @@
+#!/bin/rc
+# Paste to c89.pw
+cat $* | hpost -u http://c89.pw -p / paste@/fd/0

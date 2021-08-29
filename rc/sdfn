@@ -1,0 +1,5 @@
+#!/bin/rc
+# Mount the SDF ftp plan9 directory
+
+ftpfs -a ftp@sdf.org -m /n/sdf.org -r /pub/sdf/plan9 sdf.org
+echo 'Mounted at /n/sdf.org ⋯'

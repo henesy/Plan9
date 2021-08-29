@@ -1,0 +1,3 @@
+#!/bin/rc
+# Roughly convert a makefile to a mkfile
+# usage: make2mk file
